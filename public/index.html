@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Portfolio - Nguyễn Huỳnh Thanh Hải"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -24,7 +24,41 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Portfolio - Nguyễn Huỳnh Thanh Hải</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#3b82f6',
+              secondary: '#1e40af',
+              accent: '#60a5fa',
+              dark: '#1f2937',
+            },
+            backgroundColor: {
+              'dark-bg': '#0f172a',  // blue-950
+              'dark-card': '#1e3a8a', // blue-900
+            },
+            textColor: {
+              'dark-text': '#f1f5f9',
+            },
+            animation: {
+              'spin-slow': 'spin 3s linear infinite',
+              'bounce-slow': 'bounce 3s infinite ease-in-out',
+              'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+            },
+            borderColor: {
+              'dark-border': '#1e3a8a',
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Thêm FontAwesome để có các icon thiếu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

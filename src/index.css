@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.tech-item {
+  @apply p-4 rounded-lg transition-all duration-300 hover:bg-gray-50 dark:hover:bg-blue-700;
+}
+
+.tech-item:hover p {
+  @apply text-blue-600 dark:text-blue-300;
+}
