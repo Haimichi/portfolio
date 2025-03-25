@@ -28,3 +28,678 @@
 .theme-toggle-animation:hover {
   transform: rotate(45deg);
 }
+
+/* Animaciones generales */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes width {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slide-up {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.8; }
+  70%, 100% { transform: scale(2); opacity: 0; }
+}
+
+/* Clases de animación */
+.animate-float { animation: float 3s infinite ease-in-out; }
+.animate-float-delay { animation: float 3s infinite ease-in-out 0.5s; }
+.animate-float-delay-2 { animation: float 3s infinite ease-in-out 1s; }
+.animate-float-delay-3 { animation: float 3.5s infinite ease-in-out 1.5s; }
+.animate-float-delay-4 { animation: float 4s infinite ease-in-out 2s; }
+.animate-float-slow { animation: float 6s infinite ease-in-out; }
+.animate-width { animation: width 1.5s ease-out; }
+.animate-gradient { 
+  background-size: 200% 200%; 
+  animation: gradient 3s ease infinite; 
+}
+.animate-fade-in { animation: slide-up 0.8s ease forwards; }
+.animate-fade-in-delay { animation: slide-up 0.8s ease 0.2s forwards; }
+.animate-fade-in-delay-2 { animation: slide-up 0.8s ease 0.4s forwards; }
+.animate-fade-in-delay-3 { animation: slide-up 0.8s ease 0.6s forwards; }
+.animate-fade-in-up { animation: slide-up 1s ease forwards; }
+.animate-bounce-slow { animation: bounce 3s infinite ease-in-out; }
+.animate-spin-slow { animation: spin 15s linear infinite; }
+.animate-pulse-slow { animation: pulse 5s infinite ease-in-out; }
+.animate-ping-slow { animation: ping-slow 3s infinite ease-in-out; }
+.perspective { perspective: 1000px; }
+.hover\:rotate-y-10:hover { transform: rotateY(10deg); }
+
+/* Football animation */
+.football-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.football-bounce {
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: football-jump 1.5s infinite ease-in-out;
+}
+.football-shadow {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 10px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+  animation: shadow-resize 1.5s infinite ease-in-out;
+}
+@keyframes football-jump {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(180deg); }
+}
+@keyframes shadow-resize {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+  50% { transform: translateX(-50%) scale(0.5); opacity: 0.3; }
+}
+
+/* Book animation */
+.book-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.book {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+.book-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #3B82F6, #93C5FD);
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform-origin: left;
+  z-index: 1;
+}
+.book-page {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 8%;
+  background: white;
+  border-radius: 2px;
+  transform-origin: left;
+  z-index: 1;
+}
+.page-1 {
+  animation: flip-1 3.5s infinite ease-in-out;
+}
+.page-2 {
+  animation: flip-2 3.5s infinite ease-in-out;
+}
+.page-3 {
+  animation: flip-3 3.5s infinite ease-in-out;
+}
+@keyframes flip-1 {
+  0%, 20% { transform: rotateY(0); }
+  30%, 100% { transform: rotateY(-180deg); }
+}
+@keyframes flip-2 {
+  0%, 40% { transform: rotateY(0); }
+  50%, 100% { transform: rotateY(-180deg); }
+}
+@keyframes flip-3 {
+  0%, 60% { transform: rotateY(0); }
+  70%, 90% { transform: rotateY(-180deg); }
+  100% { transform: rotateY(0); }
+}
+
+/* Animación mejorada de viaje */
+.travel-scene-container {
+  height: 80px;
+  overflow: hidden;
+}
+
+.travel-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.sky-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #7B93DB, #A9C1FF);
+  z-index: 1;
+}
+
+.sun {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #FFD66B;
+  border-radius: 50%;
+  top: 15%;
+  left: 15%;
+  box-shadow: 0 0 20px 5px rgba(255, 214, 107, 0.6);
+  z-index: 2;
+}
+
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 20px;
+  z-index: 3;
+}
+
+.cloud-1 {
+  width: 35px;
+  height: 10px;
+  top: 25%;
+  animation: cloud-move-right-to-left 8s infinite linear;
+}
+
+.cloud-2 {
+  width: 25px;
+  height: 8px;
+  top: 15%;
+  animation: cloud-move-right-to-left 6s infinite linear;
+  animation-delay: 1s;
+}
+
+.cloud-3 {
+  width: 40px;
+  height: 12px;
+  top: 35%;
+  animation: cloud-move-right-to-left 9s infinite linear;
+  animation-delay: 3s;
+}
+
+.cloud-4 {
+  width: 30px;
+  height: 9px;
+  top: 20%;
+  animation: cloud-move-right-to-left 7s infinite linear;
+  animation-delay: 2s;
+}
+
+.mountain {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.mountain-1 {
+  border-width: 0 30px 25px 30px;
+  border-color: transparent transparent #6B7F9E transparent;
+  left: 15%;
+}
+
+.mountain-2 {
+  border-width: 0 40px 35px 40px;
+  border-color: transparent transparent #526480 transparent;
+  left: 50%;
+}
+
+.travel-plane {
+  position: absolute;
+  font-size: 2rem;
+  color: #A084E8;
+  z-index: 5;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+  animation: plane-flying-advanced 6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.plane-trail {
+  position: absolute;
+  z-index: 4;
+  height: 3px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+  border-radius: 3px;
+  animation: plane-trail 6s infinite linear;
+}
+
+@keyframes cloud-move-right-to-left {
+  0% { left: 110%; }
+  100% { left: -50%; }
+}
+
+@keyframes plane-flying-advanced {
+  0% { 
+    left: -10%; 
+    top: 40%; 
+    transform: rotate(10deg); 
+  }
+  25% { 
+    left: 30%; 
+    top: 25%; 
+    transform: rotate(0deg); 
+  }
+  50% { 
+    left: 60%; 
+    top: 40%; 
+    transform: rotate(0deg); 
+  }
+  75% { 
+    left: 80%; 
+    top: 30%; 
+    transform: rotate(-10deg); 
+  }
+  100% { 
+    left: 110%; 
+    top: 20%; 
+    transform: rotate(-15deg); 
+  }
+}
+
+@keyframes plane-trail {
+  0% { 
+    width: 0;
+    left: -10%; 
+    top: 40%; 
+    opacity: 0;
+  }
+  10% {
+    width: 20px;
+    opacity: 0.7;
+  }
+  25% { 
+    left: 30%; 
+    top: 25%; 
+  }
+  50% { 
+    width: 40px;
+    left: 60%; 
+    top: 40%; 
+  }
+  75% { 
+    left: 80%; 
+    top: 30%; 
+  }
+  90% {
+    width: 30px;
+    opacity: 0.5;
+  }
+  100% { 
+    width: 0;
+    left: 110%; 
+    top: 20%; 
+    opacity: 0;
+  }
+}
+
+/* Para móviles y compatibilidad con hover */
+@media (hover: hover) {
+  .hover-trigger .football-static,
+  .hover-trigger .book-static,
+  .hover-trigger .plane-static {
+    opacity: 1;
+  }
+  .hover-trigger:hover .football-static,
+  .hover-trigger:hover .book-static,
+  .hover-trigger:hover .plane-static {
+    opacity: 0;
+  }
+  .hover-trigger .football-bounce,
+  .hover-trigger .book-container,
+  .hover-trigger .plane-container {
+    opacity: 0;
+  }
+  .hover-trigger:hover .football-bounce,
+  .hover-trigger:hover .book-container,
+  .hover-trigger:hover .plane-container {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Animaciones de transición entre páginas */
+.page-transition {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Opcional: Agregar overlay de carga */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(30, 64, 175, 0.2);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid rgba(59, 130, 246, 0.2);
+  border-top-color: #3b82f6;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Efecto deslizamiento lateral */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Efecto zoom */
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Efecto de transición global */
+body.page-transitioning {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+body {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Efecto de máquina de escribir */
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid #3B82F6;
+  white-space: nowrap;
+  margin: 0;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #3B82F6 }
+}
+
+/* Efecto de revelación de palabras */
+.word-reveal {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: revealWord 0.8s forwards;
+}
+
+.reveal-delay-1 {
+  animation-delay: 0.2s;
+}
+
+.reveal-delay-2 {
+  animation-delay: 0.4s;
+}
+
+.reveal-delay-3 {
+  animation-delay: 0.6s;
+}
+
+@keyframes revealWord {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efecto de aparición de líneas de texto */
+.line-appear {
+  display: block;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: appearLine 0.8s ease forwards;
+}
+
+.appear-delay-1 {
+  animation-delay: 0.5s;
+}
+
+@keyframes appearLine {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Efecto de brillo al pasar el cursor */
+.hover-glow {
+  transition: text-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+/* Efecto de brillo para botones */
+.button-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.button-shimmer:hover::after {
+  opacity: 1;
+  animation: shimmer 1.5s infinite;
+}
+
+.border-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.border-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.border-shimmer:hover::before {
+  left: 100%;
+  animation: borderShimmer 1.5s infinite;
+}
+
+/* Efecto de flotación para iconos sociales */
+.icon-float {
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  100% { transform: translateX(100%) rotate(30deg); }
+}
+
+@keyframes borderShimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Transición de página */
+.page-transitioning {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
