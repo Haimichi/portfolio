@@ -1,22 +1,27 @@
 import React, { useContext } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
-import ThemeContext from '../context/ThemeContext';
+import { ThemeContext } from '../context/ThemeContext';
+import { motion } from 'framer-motion';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const isDark = theme === 'dark';
 
   return (
-    <button
+    <motion.button
       onClick={toggleTheme}
-      className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-yellow-300 hover:bg-gray-300 dark:hover:bg-blue-900 transition-all duration-500 transform hover:scale-110"
-      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      className={`p-2 rounded-full ${
+        isDark ? 'bg-gray-800 text-yellow-300' : 'bg-blue-100 text-blue-800'
+      } focus:outline-none theme-toggle-animation`}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
     >
-      {theme === 'dark' ? (
-        <FaSun className="w-5 h-5 animate-spin-slow" />
+      {isDark ? (
+        <FaSun className="w-5 h-5" />
       ) : (
-        <FaMoon className="w-5 h-5 animate-bounce-slow" />
+        <FaMoon className="w-5 h-5" />
       )}
-    </button>
+    </motion.button>
   );
 };
 

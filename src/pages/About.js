@@ -47,7 +47,7 @@ const About = () => {
             </div>
             
             <a 
-              href="/CV_NguyenHuynhThanhHai.pdf" 
+              href="https://27vvzl-my.sharepoint.com/:b:/g/personal/thanhhai_27vvzl_onmicrosoft_com/EXKdDATPTvxFma9lzbUJFzsBYc6tokKwB_LH5T0Vk7Q0pw?e=ylYnjo" 
               download 
               className="btn btn-primary inline-flex items-center"
             >

@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaArrowRight, FaGithub, FaLinkedin, FaEnvelope, FaCode, FaMobileAlt, FaServer, FaFutbol, FaBook, FaPlane } from 'react-icons/fa';
+import React, { useRef, useEffect, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowRight, FaGithub, FaLinkedin, FaEnvelope, FaCode, FaMobileAlt, FaServer, FaFutbol, FaBook, FaPlane, FaFacebookF, FaEye } from 'react-icons/fa';
 import { 
   FaReact, FaHtml5, FaCss3Alt, FaJs, FaNodeJs, 
   FaDatabase, FaDocker, FaGitAlt, FaNpm, FaFigma, FaAndroid, FaFirefox,
@@ -9,7 +9,11 @@ import {
 import { 
   SiFlutter, SiDart, SiMongodb, SiMysql, 
   SiFirebase, SiPostman, SiVscodium 
-} from 'react-icons/si';
+} from 'react-icons/si'
+import ProjectCard from '../components/ProjectCard';
+import Waves from '../components/Waves';
+import { ThemeContext } from '../context/ThemeContext';
+import TechGrid from '../components/TechGrid';
 
 import "../styles/tailwind.css";
 
@@ -20,7 +24,8 @@ const Home = () => {
   const ctaRef = useRef(null);
   const hobbiesRef = useRef(null);
   const navigate = useNavigate();
-  
+  const { theme } = useContext(ThemeContext);
+  const isDark = theme === 'dark';
   // Hiệu ứng reveal khi scroll
   useEffect(() => {
     const observerOptions = {
@@ -60,6 +65,7 @@ const Home = () => {
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
+    const heroRefCurrent = heroRef.current;
 
     // Set canvas size
     const updateCanvasSize = () => {
@@ -68,12 +74,12 @@ const Home = () => {
       canvas.style.left = '0';
       canvas.style.width = '100%';
       canvas.style.height = '100%'; // Chiếm toàn bộ chiều cao hero section
-      canvas.width = heroRef.current.offsetWidth;
-      canvas.height = heroRef.current.offsetHeight;
+      canvas.width = heroRefCurrent.offsetWidth;
+      canvas.height = heroRefCurrent.offsetHeight;
     };
     updateCanvasSize();
 
-    heroRef.current.insertBefore(canvas, heroRef.current.firstChild);
+    heroRefCurrent.insertBefore(canvas, heroRefCurrent.firstChild);
 
     // Tạo particles nhỏ hơn và ít hơn
     const particles = [];
@@ -183,9 +189,34 @@ const Home = () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       canvas.removeEventListener('mousemove', handleMouseMove);
-      if (heroRef.current) {
-        heroRef.current.removeChild(canvas);
+      if (heroRefCurrent) {
+        heroRefCurrent.removeChild(canvas);
       }
+    };
+  }, []);
+  
+  // Thêm vào phần useEffect trong Home.js
+  useEffect(() => {
+    // Xử lý sự kiện khi cuộn để điều chỉnh hiệu ứng Waves
+    const handleScroll = () => {
+      const wavesContainer = document.querySelector('.waves-container');
+      const headerHeight = 64; // Chiều cao của header
+      
+      if (wavesContainer) {
+        if (window.scrollY > 50) {
+          // Khi đã cuộn xuống, tạo hiệu ứng clip cho waves chỉ hiển thị ở hero section
+          wavesContainer.style.clipPath = `polygon(0 ${headerHeight}px, 100% ${headerHeight}px, 100% 100%, 0 100%)`;
+        } else {
+          // Khi ở đầu trang, hiện waves ở cả header và hero
+          wavesContainer.style.clipPath = 'none';
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
   
@@ -195,7 +226,7 @@ const Home = () => {
       id: 1,
       title: 'Booky',
       description: 'Ứng dụng di động Flutter cho phép người dùng đọc và quản lý sách yêu thích.',
-      image: '/images/booky.jpg',
+      image: '/booky.png',
       technologies: ['Flutter', 'Dart', 'Node.js'],
       github: 'https://github.com/Haimichi/DoAn_LTMobile',
       demo: '#',
@@ -210,7 +241,7 @@ const Home = () => {
       title: 'Manga Corner',
       description: 'Ứng dụng web giúp người dùng khám phá và quản lý truyện tranh yêu thích.',
       image: '/images/manga-corner.jpg',
-      technologies: ['JavaScript', 'HTML', 'CSS', 'Node.js'],
+      technologies: ['HTML', 'CSS','React', 'Tailwind', 'Node.js'],
       github: 'https://github.com/Haimichi/manga-corner',
       demo: '#',
       features: [
@@ -224,7 +255,7 @@ const Home = () => {
       title: 'Table Reservations',
       description: 'Hệ thống đặt bàn trực tuyến cho nhà hàng và quán ăn.',
       image: '/images/table-reservations.jpg',
-      technologies: ['React', 'Node.js', 'MongoDB'],
+      technologies: ['ASP.NET Core', 'SQLServer', 'WebServices'],
       github: 'https://github.com/Sushiba2ker/Table-reservations',
       demo: '#',
       features: [
@@ -293,14 +324,51 @@ const Home = () => {
     }, 300);
   };
 
+  // // Thêm hàm để tạo màu khác nhau cho mỗi dự án
+  // function getProjectColor(id) {
+  //   const colors = [
+  //     [0, 1, 1],    // Màu cyan - xanh lam
+  //     [0.33, 1, 1], // Màu xanh lá
+  //     [0.66, 1, 1], // Màu tím
+  //     [0.15, 1, 1], // Màu xanh lá nhạt
+  //     [0.5, 1, 1],  // Màu tím nhạt
+  //     [0.85, 1, 1]  // Màu đỏ nhạt
+  //   ];
+    
+  //   return colors[(id - 1) % colors.length];
+  // }
+
   return (
     <>
-      {/* Hero Section - Cải thiện hiệu ứng */}
+      {/* Hero Section - bo tròn ở phần dưới */}
       <section 
         ref={heroRef} 
-        className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-white to-blue-50 dark:from-blue-950 dark:to-indigo-950"
+        className="relative min-h-[100vh] flex items-center overflow-hidden bg-gradient-to-br from-white to-blue-50 dark:from-blue-950 dark:to-indigo-950 pt-16 md:pt-20 rounded-b-3xl"
       >
-        <div className="container mx-auto px-4 py-20 z-10">
+        {/* Container của Waves - điều chỉnh z-index thấp hơn header */}
+        <div className="absolute inset-0 waves-container overflow-hidden rounded-b-3xl">
+          <Waves 
+            lineColor={isDark ? "rgba(96, 165, 250, 0.8)" : "rgba(59, 130, 246, 0.6)"} 
+            backgroundColor="transparent" 
+            waveSpeedX={0.015}
+            waveSpeedY={0.008}
+            waveAmpX={40}
+            waveAmpY={25}
+            xGap={15}
+            yGap={30}
+            friction={0.94}
+            tension={0.008}
+            maxCursorMove={120}
+            style={{ 
+              zIndex: 0,
+              strokeWidth: 1.5,
+            }}
+            className="opacity-90 dark:opacity-75 wave-effect"
+          />
+        </div>
+        
+        {/* Nội dung container */}
+        <div className="container mx-auto px-4 py-20 z-10 relative">
           <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
             <div className="md:w-3/5 space-y-6 text-center md:text-left">
               {/* Efecto de aparición de letras una por una */}
@@ -308,11 +376,11 @@ const Home = () => {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   <div className="full-intro-animation">
                     <span className="text-gray-900 dark:text-white intro-text-start">
-                      Xin chào, tôi là
-                    </span>
+                      Xin chào, tôi là 
+                  </span>
                     <span className="intro-text-name bg-clip-text text-transparent bg-gradient-to-l from-indigo-500 to-blue-600">
-                      Nguyễn Huỳnh Thanh Hải
-                    </span>
+                    Nguyễn Huỳnh Thanh Hải
+                  </span>
                   </div>
                 </h1>
               </div>
@@ -323,7 +391,7 @@ const Home = () => {
                   <span className="word-reveal">Mobile</span> <span className="word-reveal reveal-delay-1">&</span> <span className="word-reveal reveal-delay-2">Web</span> <span className="word-reveal reveal-delay-3">Developer</span>
                   <span className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 opacity-50 animate-width"></span>
                 </span>
-              </h2>
+                </h2>
               
               {/* Párrafo con fade-in por líneas */}
               <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
@@ -335,31 +403,44 @@ const Home = () => {
               <div className="flex flex-wrap gap-4 justify-center md:justify-start animate-fade-in-delay-2">
                 <button 
                   onClick={() => handleNavigation('/about')}
-                  className="btn btn-primary px-8 py-3 text-lg shadow-xl hover:shadow-blue-500/20 transform transition hover:-translate-y-1 hover:scale-105 button-shimmer"
+                  className="btn-modern primary group relative overflow-hidden px-8 py-3 text-lg font-medium rounded-lg flex items-center gap-2"
                 >
-                  Tìm hiểu thêm
+                  <span className="relative z-10">Tìm hiểu thêm</span>
+                  <span className="icon-container relative z-10 group-hover:translate-x-1 transition-transform">
+                    <FaArrowRight className="ml-1" />
+                  </span>
+                  <span className="btn-bg absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-300"></span>
+                  <span className="btn-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </button>
+                
                 <button 
                   onClick={() => handleNavigation('/projects')}
-                  className="btn btn-outline px-8 py-3 text-lg border-2 hover:bg-gray-50 dark:hover:bg-blue-900 transform transition hover:-translate-y-1 hover:scale-105 border-shimmer"
+                  className="btn-modern secondary group relative overflow-hidden px-8 py-3 text-lg font-medium rounded-lg flex items-center gap-2"
                 >
-                  Xem dự án
+                  <span className="relative z-10">Xem dự án</span>
+                  <span className="icon-container relative z-10 flex items-center justify-center overflow-hidden w-5 h-5">
+                    <span className="icon-swap">
+                      <FaEye className="top-icon" />
+                      <FaCode className="bottom-icon" />
+                    </span>
+                  </span>
+                  <span className="btn-border absolute inset-0"></span>
                 </button>
-              </div>
+                </div>
               
               {/* Redes sociales con efectos de rotación */}
               <div className="flex gap-6 pt-4 justify-center md:justify-start animate-fade-in-delay-3">
                 <a href="https://github.com/Haimichi" target="_blank" rel="noreferrer" className="icon-float text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-12">
-                  <FaGithub size={24} />
-                </a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer" className="icon-float delay-100 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-12">
-                  <FaLinkedin size={24} />
-                </a>
+                    <FaGithub size={24} />
+                  </a>
+                <a href="https://www.facebook.com/hajj02/" target="_blank" rel="noreferrer" className="icon-float delay-100 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-12">
+                  <FaFacebookF size={24} />
+                  </a>
                 <a href="mailto:your.email@example.com" className="icon-float delay-200 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-12">
-                  <FaEnvelope size={24} />
-                </a>
+                    <FaEnvelope size={24} />
+                  </a>
+                </div>
               </div>
-            </div>
             
             <div className="md:w-2/5">
               <div className="relative mx-auto w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 animate-float">
@@ -378,191 +459,175 @@ const Home = () => {
           </div>
         </div>
         
-        {/* Decorative elements với hiệu ứng */}
-        <div className="absolute -bottom-16 -right-16 w-64 h-64 bg-blue-100 dark:bg-blue-900 rounded-full opacity-50 animate-float-delay"></div>
-        <div className="absolute -top-16 -left-16 w-48 h-48 bg-indigo-100 dark:bg-indigo-900 rounded-full opacity-50 animate-float-delay-2"></div>
-        <div className="absolute top-1/3 right-10 w-20 h-20 bg-purple-100 dark:bg-purple-900 rounded-full opacity-30 animate-float-delay-3"></div>
-        <div className="absolute bottom-1/3 left-10 w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full opacity-30 animate-float-delay-4"></div>
+        {/* Decorative elements - điều chỉnh để phù hợp với góc bo tròn */}
+        <div className="absolute -bottom-16 -right-16 w-64 h-64 bg-blue-100 dark:bg-blue-900 rounded-full opacity-50 animate-float-delay z-0"></div>
+        <div className="absolute -top-16 -left-16 w-48 h-48 bg-indigo-100 dark:bg-indigo-900 rounded-full opacity-50 animate-float-delay-2 z-0"></div>
+        <div className="absolute top-1/3 right-10 w-20 h-20 bg-purple-100 dark:bg-purple-900 rounded-full opacity-30 animate-float-delay-3 z-0"></div>
+        <div className="absolute bottom-1/3 left-10 w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full opacity-30 animate-float-delay-4 z-0"></div>
       </section>
 
-      {/* Skills Section - Hiệu ứng mới */}
-      <section ref={skillsRef} className="py-20 bg-white dark:bg-blue-950 transition-opacity duration-1000">
+      {/* Thêm khoảng cách nhỏ giữa hero và section tiếp theo */}
+      <div className="h-4"></div>
+
+      {/* Project Showcase Section - viền mỏng hơn và khoảng cách nhỏ hơn */}
+      <section 
+        ref={projectsRef} 
+        className={`py-16 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
+        transition-all duration-500 rounded-3xl mx-4 md:mx-6 lg:mx-8 my-6 
+        shadow-lg border ${isDark ? 'border-blue-800' : 'border-blue-300'}`}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 inline-block relative">
+          <div className="mb-10">
+            <h2 className="text-5xl font-bold mb-4">10 Project Showcase</h2>
+            <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mb-8`}>
+              Explore the various projects I've worked on in the software development field. See my diverse and high-quality work.
+            </p>
+            <div className="flex items-center gap-4 mb-8">
+              <a href="https://github.com/Haimichi" target="_blank" rel="noreferrer" className={`${isDark ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'} transition-colors`}>
+                <FaGithub size={24} />
+              </a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className={`${isDark ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'} transition-colors`}>
+                <FaLinkedin size={24} />
+              </a>
+              <button className={`ml-4 px-6 py-2 border ${isDark ? 'border-white hover:bg-white hover:text-blue-950' : 'border-gray-800 hover:bg-gray-800 hover:text-white'} rounded-full flex items-center gap-2 transition-all`}>
+                See More <FaArrowRight className="ml-1" />
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Project 1 */}
+            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg border ${isDark ? 'border-blue-700' : 'border-blue-200'}`}>
+              <div className={`relative p-3 ${isDark ? 'bg-[#0099ff]/10' : 'bg-blue-50'} aspect-video`}>
+                <img 
+                  src="/images/positivus.jpg" 
+                  alt="Positivus Landing Page" 
+                  className="w-full h-full object-cover rounded-lg"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
+                  }}
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">Positivus Landing Page</h3>
+                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Implementation of the Positivus Landing Page design using React.js, CSS with BEM methodology, and Framer Motion for animations.
+                </p>
+              </div>
+            </div>
+
+            {/* Project 2 */}
+            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg`}>
+              <div className={`relative p-3 ${isDark ? 'bg-[#ff4d94]/10' : 'bg-pink-50'} aspect-video`}>
+                <img 
+                  src="/images/smoothie.jpg" 
+                  alt="Smoothie" 
+                  className="w-full h-full object-cover rounded-lg"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
+                  }}
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">Smoothie</h3>
+                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  A fresh and animation-rich website improvised by implementing Nickfox's UI/UX design prototype.
+                </p>
+              </div>
+            </div>
+
+            {/* Project 3 */}
+            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg`}>
+              <div className={`relative p-3 ${isDark ? 'bg-[#00a3cc]/10' : 'bg-cyan-50'} aspect-video`}>
+                <img 
+                  src="/images/bittle.jpg" 
+                  alt="Bittle Link Shortener" 
+                  className="w-full h-full object-cover rounded-lg"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
+                  }}
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">Bittle Link Shortener</h3>
+                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  A RESTful API for direct static URL shortening developed using Express.js, MongoDB, and short-id.
+                </p>
+              </div>
+            </div>
+
+            {/* Project 4 */}
+            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg`}>
+              <div className={`relative p-3 ${isDark ? 'bg-[#00cc66]/10' : 'bg-green-50'} aspect-video`}>
+                <img 
+                  src="/images/daunnesia.jpg" 
+                  alt="Daunnesia Angency" 
+                  className="w-full h-full object-cover rounded-lg"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
+                  }}
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">Daunnesia Angency</h3>
+                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Web application for Agency that sells software application without sign in feature.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Stack Section - viền mỏng hơn và khoảng cách nhỏ hơn */}
+      <section 
+        ref={skillsRef} 
+        className={`py-16 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
+        rounded-3xl mx-4 md:mx-6 lg:mx-8 my-6 
+        shadow-lg border ${isDark ? 'border-blue-800' : 'border-blue-300'}`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="mb-10 text-center">
+            <h2 className="text-3xl font-bold mb-4 inline-block relative">
               Kỹ Năng Chuyên Môn
               <div className="absolute bottom-0 left-1/4 right-1/4 h-1 bg-blue-500 animate-width"></div>
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-4">
-              Các công nghệ và công cụ tôi thường xuyên sử dụng trong quá trình phát triển
+            <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto mt-4`}>
+              Các công nghệ tôi thường xuyên sử dụng trong quá trình phát triển
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((skill, index) => (
-              <div 
-                key={index} 
-                className="bg-gray-50 dark:bg-blue-900 rounded-xl p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className={`text-${skill.color}-600 dark:text-${skill.color}-400 mb-4 transform transition-transform group-hover:scale-110 group-hover:rotate-6`}>
-                  {skill.icon}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white text-center mb-6 relative overflow-hidden group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {skill.category}
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                </h3>
-                <div className="grid grid-cols-2 gap-6">
-                  {skill.technologies.map((tech, techIndex) => (
-                    <div key={techIndex} className="tech-item group text-center">
-                      <div className={`${tech.color} mx-auto transition-all duration-300 transform group-hover:scale-125 group-hover:rotate-12`}>
-                        {tech.icon}
-                      </div>
-                      <p className="mt-2 text-sm text-center text-gray-600 dark:text-gray-300 transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400">{tech.name}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <TechGrid isDark={isDark} />
         </div>
       </section>
 
-      {/* Featured Projects Section - Hiệu ứng mới */}
-      <section ref={projectsRef} className="py-20 bg-gray-50 dark:bg-blue-900 transition-opacity duration-1000">
+      {/* Hobbies Section - viền mỏng hơn và khoảng cách nhỏ hơn */}
+      <section 
+        ref={hobbiesRef} 
+        className={`py-16 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
+        rounded-3xl mx-4 md:mx-6 lg:mx-8 my-6 
+        shadow-lg border ${isDark ? 'border-blue-800' : 'border-blue-300'}`}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 inline-block relative">
-              Dự Án Nổi Bật
-              <div className="absolute bottom-0 left-1/4 right-1/4 h-1 bg-blue-500 animate-width"></div>
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-4">
-              Một số dự án tiêu biểu tôi đã thực hiện gần đây
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
-              <div 
-                key={project.id} 
-                className="group bg-white dark:bg-blue-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105"
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    onError={(e) => {
-                      e.target.src = `https://via.placeholder.com/400x200.png?text=${project.title}`;
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, index) => (
-                      <span
-                        key={index}
-                          className="px-2 py-1 text-xs bg-blue-100/80 dark:bg-blue-900/80 text-blue-800 dark:text-blue-200 rounded-full backdrop-blur-sm transform transition-transform hover:scale-110"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 relative overflow-hidden">
-                    {project.title}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex justify-between items-center mt-6">
-                    <a
-                      href={project.github}
-                      className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors transform hover:scale-125"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaGithub size={20} />
-                    </a>
-                    <a
-                      href={project.demo}
-                      className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-2 font-medium group"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Xem chi tiết <FaArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link 
-              to="/projects" 
-              className="inline-flex items-center btn btn-primary px-8 py-3 text-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
-            >
-              Xem tất cả dự án <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action Section - Hiệu ứng mới */}
-      <section ref={ctaRef} className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600 text-white transition-opacity duration-1000 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 animate-pulse-slow"></div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in">Bạn có dự án cần triển khai?</h2>
-          <p className="text-lg max-w-2xl mx-auto mb-8 animate-fade-in-delay">
-            Tôi luôn sẵn sàng đưa ý tưởng của bạn thành hiện thực với các giải pháp công nghệ hiện đại và hiệu quả.
-          </p>
-          <a 
-            href="#contact" 
-            className="inline-flex items-center px-8 py-3 text-lg bg-white text-blue-600 font-medium rounded-full shadow-xl hover:shadow-blue-800/30 hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 animate-bounce-slow"
-          >
-            Liên hệ ngay
-          </a>
-          
-          {/* Hiệu ứng hình học */}
-          <div className="absolute top-10 left-10 w-20 h-20 border-2 border-white/20 rounded-full animate-spin-slow"></div>
-          <div className="absolute bottom-10 right-10 w-32 h-32 border-2 border-white/20 rounded-lg rotate-45 animate-float"></div>
-          <div className="absolute top-1/2 right-1/4 w-16 h-16 border-2 border-white/20 rounded-full animate-ping-slow"></div>
-        </div>
-      </section>
-
-      {/* Hobbies Section - Con animaciones mejoradas */}
-      <section ref={hobbiesRef} className="py-20 bg-white dark:bg-blue-950 transition-opacity duration-1000">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 inline-block relative">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4 inline-block relative">
               Sở Thích
               <div className="absolute bottom-0 left-1/3 right-1/3 h-1 bg-blue-500 animate-width"></div>
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-4">
+            <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} max-w-2xl mx-auto mt-4`}>
               Những điều tôi yêu thích bên cạnh lập trình
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Football Hobby */}
             <div className="group">
-              <div className="relative overflow-hidden rounded-xl bg-blue-50 dark:bg-blue-900 p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2">
-                <div className="absolute -right-16 -bottom-16 w-40 h-40 bg-blue-200 dark:bg-blue-800 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
+              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2 border ${isDark ? 'border-blue-700' : 'border-blue-200'}`}>
+                <div className={`absolute -right-16 -bottom-16 w-40 h-40 ${isDark ? 'bg-blue-500/10' : 'bg-blue-100'} rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500`}></div>
                 <div className="relative z-10 min-h-[200px]">
                   <div className="relative flex justify-center items-center h-20 mb-6">
-                    {/* Static icon */}
                     <FaFutbol className="w-16 h-16 text-green-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
                     
-                    {/* Animation that appears on hover */}
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute">
                       <div className="football-wrapper">
                         <FaFutbol className="w-16 h-16 text-green-500 football-bounce" />
@@ -571,8 +636,8 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">Bóng Đá</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-center">
+                  <h3 className="text-xl font-bold mb-4 text-center">Bóng Đá</h3>
+                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center`}>
                     Đam mê theo dõi và chơi bóng đá. Là fan của Manchester United và đội tuyển Việt Nam.
                   </p>
                 </div>
@@ -581,14 +646,12 @@ const Home = () => {
 
             {/* Reading Hobby */}
             <div className="group">
-              <div className="relative overflow-hidden rounded-xl bg-indigo-50 dark:bg-indigo-900 p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2">
-                <div className="absolute -right-16 -bottom-16 w-40 h-40 bg-indigo-200 dark:bg-indigo-800 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
+              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2`}>
+                <div className={`absolute -right-16 -bottom-16 w-40 h-40 ${isDark ? 'bg-indigo-500/10' : 'bg-indigo-100'} rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500`}></div>
                 <div className="relative z-10 min-h-[200px]">
                   <div className="relative flex justify-center items-center h-20 mb-6">
-                    {/* Static icon */}
                     <FaBook className="w-16 h-16 text-blue-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
                     
-                    {/* Animation that appears on hover */}
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute">
                       <div className="book-wrapper">
                         <div className="book">
@@ -601,24 +664,22 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">Đọc Sách</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-center">
+                  <h3 className="text-xl font-bold mb-4 text-center">Đọc Sách</h3>
+                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center`}>
                     Yêu thích đọc sách về công nghệ, khoa học và phát triển bản thân.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Traveling Hobby - Animación mejorada */}
+            {/* Traveling Hobby */}
             <div className="group">
-              <div className="relative overflow-hidden rounded-xl bg-purple-50 dark:bg-purple-900 p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2">
-                <div className="absolute -right-16 -bottom-16 w-40 h-40 bg-purple-200 dark:bg-purple-800 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500"></div>
+              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2`}>
+                <div className={`absolute -right-16 -bottom-16 w-40 h-40 ${isDark ? 'bg-purple-500/10' : 'bg-purple-100'} rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500`}></div>
                 <div className="relative z-10 min-h-[200px]">
                   <div className="relative flex justify-center items-center h-24 mb-6">
-                    {/* Static icon */}
                     <FaPlane className="w-16 h-16 text-purple-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
                     
-                    {/* Animation that appears on hover */}
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute w-full travel-scene-container">
                       <div className="travel-scene">
                         <div className="sky-bg"></div>
@@ -635,8 +696,8 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">Du Lịch</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-center">
+                  <h3 className="text-xl font-bold mb-4 text-center">Du Lịch</h3>
+                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center`}>
                     Thích khám phá những vùng đất mới và trải nghiệm văn hóa khác nhau.
                   </p>
                 </div>
@@ -645,11 +706,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* Ejemplo de link con transición */}
-      <button onClick={() => handleNavigation('/about')} className="...">
-        Ir a About
-      </button>
     </>
   );
 };

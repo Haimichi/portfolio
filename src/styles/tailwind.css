@@ -703,3 +703,717 @@ body {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Nuevos estilos para botones modernos */
+.btn-modern {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Botón primario */
+.btn-modern.primary {
+  color: white;
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-modern.primary:hover {
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-modern.primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+}
+
+/* Efecto de fondo con gradiente */
+.btn-bg {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.btn-modern.primary:hover .btn-bg {
+  transform: scaleX(1.03);
+}
+
+/* Efecto de brillo al hover */
+.btn-glow {
+  background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  mix-blend-mode: overlay;
+}
+
+/* Botón secundario */
+.btn-modern.secondary {
+  color: #3B82F6;
+  background-color: transparent;
+}
+
+.btn-modern.secondary:hover {
+  color: #2563EB;
+  transform: translateY(-2px);
+}
+
+.btn-modern.secondary:active {
+  transform: translateY(1px);
+}
+
+/* Borde animado */
+.btn-border {
+  border: 2px solid #3B82F6;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-modern.secondary:hover .btn-border {
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Animación de intercambio de iconos */
+.icon-swap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  height: 40px;
+}
+
+.top-icon, .bottom-icon {
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+.top-icon {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.bottom-icon {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.btn-modern.secondary:hover .icon-swap .top-icon {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.btn-modern.secondary:hover .icon-swap .bottom-icon {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Efecto de partículas para el botón primario */
+.btn-modern.primary:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle, #fff 10%, transparent 10%),
+    radial-gradient(circle, #fff 10%, transparent 10%);
+  background-position: 0% 0%, 50% 50%;
+  background-size: 10px 10px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: scale(5);
+  z-index: 0;
+}
+
+.btn-modern.primary:hover:before {
+  opacity: 0.1;
+  transform: scale(1);
+  animation: particleAnimation 1s infinite;
+}
+
+@keyframes particleAnimation {
+  0% {
+    background-position: 0% 0%, 50% 50%;
+  }
+  25% {
+    background-position: 10% 0%, 60% 50%;
+  }
+  50% {
+    background-position: 20% 0%, 70% 50%;
+  }
+  75% {
+    background-position: 10% 0%, 60% 50%;
+  }
+  100% {
+    background-position: 0% 0%, 50% 50%;
+  }
+}
+
+/* Hiệu ứng đặc biệt cho Iridescence */
+.project-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover .iridescence-wrapper {
+  transform: scale(1.1);
+  filter: brightness(1.1) contrast(1.1);
+}
+
+.iridescence-wrapper {
+  transition: all 0.5s ease;
+  position: absolute;
+  inset: 0;
+}
+
+.project-title-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-title-overlay {
+  opacity: 1;
+}
+
+.project-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+}
+
+.project-card:hover .project-tech-tags {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Hiệu ứng mờ cho card khi hover */
+@keyframes cardGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+  }
+}
+
+.tilted-card-glow:hover {
+  animation: cardGlow 3s infinite;
+}
+
+/* Hiệu ứng cho văn bản */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #3b82f6, #6366f1);
+}
+
+/* Điều chỉnh cho mobile */
+@media (max-width: 640px) {
+  .tilt-card-mobile-fix {
+    transform: none !important;
+    transition: transform 0.3s ease;
+  }
+  
+  .tilt-card-mobile-fix:active {
+    transform: scale(0.98) !important;
+  }
+}
+
+/* Hiệu ứng đổ bóng cho card */
+.project-card-shadow {
+  box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.3);
+}
+
+/* Hiệu ứng glare (bóng sáng) khi hover */
+.glare-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0) 40%
+  );
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.project-card:hover .glare-effect {
+  opacity: 1;
+}
+
+/* Album title effect */
+.album-title {
+  position: relative;
+  overflow: hidden;
+}
+
+.album-title::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
+  animation: scanline 4s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Album title reflection effect */
+.album-title-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.album-title-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  transform: skewX(-25deg);
+  animation: reflectionSweep 3s ease-in-out infinite;
+}
+
+@keyframes reflectionSweep {
+  0%, 100% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+/* ShapeBlur styles */
+.shape-blur-container {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.shape-blur-container canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hiệu ứng blend mode cho ShapeBlur */
+.project-card .shape-blur-container {
+  mix-blend-mode: lighten;
+}
+
+/* Hiệu ứng gradient khi hover */
+.project-card:hover .shape-blur-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(59, 130, 246, 0.3) 0%,
+    rgba(147, 197, 253, 0.3) 50%,
+    rgba(59, 130, 246, 0.3) 100%
+  );
+  animation: gradientShift 3s ease infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hiệu ứng hào quang cho ProjectCard */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.project-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+  filter: blur(15px);
+  pointer-events: none;
+}
+
+/* Hiệu ứng ảnh */
+.project-image-container {
+  overflow: hidden;
+}
+
+.project-image-container img {
+  transition: transform 0.5s ease-in-out;
+}
+
+.project-image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Hiệu ứng hiển thị mô tả */
+.project-description {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.project-card:hover .project-description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hiệu ứng 3D và ShapeBlur bên ngoài */
+.card-shadow-outer {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* 3D Transform Styles */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-800 {
+  perspective: 800px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Những phần tử với translateZ để tạo hiệu ứng 3D */
+.z-depth-10 {
+  transform: translateZ(10px);
+}
+
+.z-depth-20 {
+  transform: translateZ(20px);
+}
+
+.z-depth-30 {
+  transform: translateZ(30px);
+}
+
+.z-depth-40 {
+  transform: translateZ(40px);
+}
+
+.z-depth-50 {
+  transform: translateZ(50px);
+}
+
+/* Hiệu ứng 3D và các class hỗ trợ */
+.perspective-800 {
+  perspective: 800px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Hiệu ứng tỏa sáng cho tiêu đề */
+@keyframes shine {
+  0%, 100% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+/* Hiệu ứng hiển thị thông tin khi hover */
+@keyframes fadeContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hover-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .hover-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:hover .non-hover-content {
+  opacity: 0;
+}
+
+.non-hover-content {
+  transition: opacity 0.3s ease;
+}
+
+/* Staggered animation for content */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.15s; }
+.stagger-3 { transition-delay: 0.2s; }
+.stagger-4 { transition-delay: 0.25s; }
+.stagger-5 { transition-delay: 0.3s; }
+
+/* Book Card Effect */
+.book-card-container {
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+}
+
+.book-cover {
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.book-card-container:hover .book-cover {
+  transform: rotateY(-60deg);
+}
+
+.book-content {
+  transform: rotateY(0deg);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.book-card-container:hover .book-content {
+  opacity: 1;
+}
+
+/* Book shadow effect */
+.book-card-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.book-card-container:hover::after {
+  opacity: 1;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Thêm vào file CSS của bạn */
+.waves-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wave-effect {
+  width: 100%;
+  height: calc(100% + 64px); /* Tổng chiều cao + chiều cao header */
+}
+
+/* CSS cho header chìm vào hero section */
+@keyframes fadeInHeader {
+  from {
+    opacity: 0.8;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background-color 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+header.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+header.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+@keyframes stickyHeader {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Đảm bảo nội dung hero hiển thị bên trên waves */
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Đảm bảo waves không che khuất header */
+.waves-container {
+  z-index: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Hiệu ứng fadeIn cho header khi cuộn */
+@keyframes fadeInHeader {
+  from {
+    opacity: 0.8;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header.scrolled {
+  animation: fadeInHeader 0.3s ease-out forwards;
+}
+
+@keyframes borderReveal {
+  0% {
+    clip-path: polygon(0% 100%, 0% 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+.animate-border-reveal {
+  animation: borderReveal 0.5s forwards;
+}
+
+@keyframes bounce-light {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse-strong {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.9; }
+}
+
+@keyframes bounce-once {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.85); }
+  100% { transform: scale(1); }
+}
+
+@keyframes spin-once {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-bounce-light {
+  animation: bounce-light 1s ease infinite;
+}
+
+.animate-pulse-strong {
+  animation: pulse-strong 1s ease infinite;
+}
+
+.animate-bounce-once {
+  animation: bounce-once 0.5s ease;
+}
+
+.animate-spin-once {
+  animation: spin-once 0.8s ease;
+}
+
+@keyframes arrow-up {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px) scale(1.2); }
+  100% { transform: translateY(-30px) scale(0.5); opacity: 0; }
+}
+
+@keyframes rocket {
+  0% { transform: translateY(0) scale(1); }
+  15% { transform: translateY(0) scale(0.9); box-shadow: 0 5px 15px rgba(59, 130, 246, 0.5); }
+  30% { transform: translateY(-5px) scale(1); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.6); }
+  100% { transform: translateY(-10px) scale(1.1); box-shadow: 0 15px 25px rgba(59, 130, 246, 0.7); }
+}
+
+.animate-arrow-up {
+  animation: arrow-up 0.5s ease-in forwards;
+}
+
+.animate-rocket {
+  animation: rocket 0.3s ease-out forwards;
+}
+
+/* Cải thiện hiệu ứng ping cho nút */
+@keyframes ping-modified {
+  0% { transform: scale(1); opacity: 0.3; }
+  70%, 100% { transform: scale(1.5); opacity: 0; }
+}
+
+.animate-ping-modified {
+  animation: ping-modified 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
