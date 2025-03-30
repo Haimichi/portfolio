@@ -8,7 +8,7 @@ import {
 } from 'react-icons/si';
 
 // Component TechGrid để quản lý trạng thái hover cho các technology
-const TechGrid = ({ isDark }) => {
+const TechGrid = ({ isDark, defaultBorder }) => {
   const [activetech, setActiveTech] = useState('Technology');
   const [activeTechColor, setActiveTechColor] = useState('text-white');
   const [isChanging, setIsChanging] = useState(false);
@@ -92,7 +92,7 @@ const TechGrid = ({ isDark }) => {
 
   // Đồng bộ màu sắc với theme website
   const bgClass = isDark ? 'bg-indigo-950' : 'bg-white';
-  const borderClass = isDark ? 'border-blue-900' : 'border-gray-200';
+  const borderClass = defaultBorder || (isDark ? 'border-blue-900' : 'border-gray-200');
   const textClass = isDark ? 'text-white' : 'text-gray-800';
 
   // Hàm trả về gradient class cho công nghệ màu trắng
@@ -125,11 +125,11 @@ const TechGrid = ({ isDark }) => {
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-6 gap-6 pt-2">
       {/* 4 ô đầu tiên ở hàng 1 */}
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/20 cursor-pointer overflow-hidden group border-2 border-transparent ${isDark ? 'hover:border-white' : 'hover:border-black'}`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/20 cursor-pointer overflow-hidden group border-2 ${borderClass} ${isDark ? 'hover:border-white' : 'hover:border-black'}`}
           onMouseEnter={() => handleTechHover('Next', 'text-white')}
           onMouseLeave={handleTechLeave}
         >
@@ -142,7 +142,7 @@ const TechGrid = ({ isDark }) => {
       
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/20 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#0468D7]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/20 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#0468D7]`}
           onMouseEnter={() => handleTechHover('Flutter', 'text-[#0468D7]')}
           onMouseLeave={handleTechLeave}
         >
@@ -155,7 +155,7 @@ const TechGrid = ({ isDark }) => {
       
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-400/30 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#61DAFB]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-400/30 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#61DAFB]`}
           onMouseEnter={() => handleTechHover('React', 'text-[#61DAFB]')}
           onMouseLeave={handleTechLeave}
         >
@@ -168,15 +168,15 @@ const TechGrid = ({ isDark }) => {
       
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/30 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#38BDF8]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/30 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#38BDF8]`}
           onMouseEnter={() => handleTechHover('Tailwind', 'text-[#38BDF8]')}
           onMouseLeave={handleTechLeave}
         >
           <div className="w-full h-full flex items-center justify-center relative p-6">
             <div className="absolute inset-0 bg-gradient-to-br from-[#38BDF8]/10 to-[#38BDF8]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             {React.cloneElement(technologies[3].icon, { className: `w-20 h-20 ${technologies[3].color} transition-transform duration-300 group-hover:scale-110` })}
+            </div>
           </div>
-        </div>
       </div>
       
       {/* Ô "Technology is my weapon" ở hàng 1, 2 cột bên phải */}
@@ -186,7 +186,7 @@ const TechGrid = ({ isDark }) => {
           <div className="text-center">
             <div className={`transition-all duration-500 ${isChanging ? 'blur-sm' : ''}`}>
               <h2 className={`text-4xl md:text-5xl font-bold ${getGradientClass(activetech, activeTechColor)} mb-2`}>
-                {activetech}
+            {activetech}
               </h2>
               <h2 className={`text-4xl md:text-5xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
                 is my weapon
@@ -199,7 +199,7 @@ const TechGrid = ({ isDark }) => {
       {/* Hàng thứ hai */}
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/30 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#F7DF1E]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-yellow-500/30 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#F7DF1E]`}
           onMouseEnter={() => handleTechHover('JavaScript', 'text-[#F7DF1E]')}
           onMouseLeave={handleTechLeave}
         >
@@ -212,7 +212,7 @@ const TechGrid = ({ isDark }) => {
       
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/30 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#3178C6]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/30 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#3178C6]`}
           onMouseEnter={() => handleTechHover('TypeScript', 'text-[#3178C6]')}
           onMouseLeave={handleTechLeave}
         >
@@ -225,7 +225,7 @@ const TechGrid = ({ isDark }) => {
       
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-500/30 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#539E43]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-500/30 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#539E43]`}
           onMouseEnter={() => handleTechHover('Node.js', 'text-[#539E43]')}
           onMouseLeave={handleTechLeave}
         >
@@ -238,7 +238,7 @@ const TechGrid = ({ isDark }) => {
       
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/30 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#007ACC]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/30 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#007ACC]`}
           onMouseEnter={() => handleTechHover('VS Code', 'text-[#007ACC]')}
           onMouseLeave={handleTechLeave}
         >
@@ -251,7 +251,7 @@ const TechGrid = ({ isDark }) => {
       
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/30 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#F24E1E]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/30 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#F24E1E]`}
           onMouseEnter={() => handleTechHover('Figma', 'text-[#F24E1E]')}
           onMouseLeave={handleTechLeave}
         >
@@ -259,19 +259,19 @@ const TechGrid = ({ isDark }) => {
             <div className="absolute inset-0 bg-gradient-to-br from-[#F24E1E]/10 to-[#F24E1E]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             {React.cloneElement(technologies[8].icon, { className: `w-20 h-20 ${technologies[8].color} transition-transform duration-300 group-hover:scale-110` })}
           </div>
-        </div>
-      </div>
+            </div>
+          </div>
       
       <div className="col-span-1">
         <div 
-          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-500/30 cursor-pointer overflow-hidden group border-2 border-transparent hover:border-[#47A248]`}
+          className={`aspect-square ${bgClass} rounded-3xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-green-500/30 cursor-pointer overflow-hidden group border-2 ${borderClass} hover:border-[#47A248]`}
           onMouseEnter={() => handleTechHover('MongoDB', 'text-[#47A248]')}
           onMouseLeave={handleTechLeave}
         >
           <div className="w-full h-full flex items-center justify-center relative p-6">
             <div className="absolute inset-0 bg-gradient-to-br from-[#47A248]/10 to-[#47A248]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             {React.cloneElement(technologies[9].icon, { className: `w-20 h-20 ${technologies[9].color} transition-transform duration-300 group-hover:scale-110` })}
-          </div>
+        </div>
         </div>
       </div>
     </div>

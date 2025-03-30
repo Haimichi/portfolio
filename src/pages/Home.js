@@ -10,7 +10,6 @@ import {
   SiFlutter, SiDart, SiMongodb, SiMysql, 
   SiFirebase, SiPostman, SiVscodium 
 } from 'react-icons/si'
-import ProjectCard from '../components/ProjectCard';
 import Waves from '../components/Waves';
 import { ThemeContext } from '../context/ThemeContext';
 import TechGrid from '../components/TechGrid';
@@ -225,7 +224,7 @@ const Home = () => {
     {
       id: 1,
       title: 'Booky',
-      description: 'Ứng dụng di động Flutter cho phép người dùng đọc và quản lý sách yêu thích.',
+      description: 'Ứng dụng di động Flutter kinh doanh nhà sách',
       image: '/booky.png',
       technologies: ['Flutter', 'Dart', 'Node.js'],
       github: 'https://github.com/Haimichi/DoAn_LTMobile',
@@ -239,8 +238,8 @@ const Home = () => {
     {
       id: 2,
       title: 'Manga Corner',
-      description: 'Ứng dụng web giúp người dùng khám phá và quản lý truyện tranh yêu thích.',
-      image: '/images/manga-corner.jpg',
+      description: 'Ứng dụng web giúp người dùng đọc truyện tranh, quản lý truyện tranh yêu thích và tương tác với cộng đồng.',
+      image: '/booky.png',
       technologies: ['HTML', 'CSS','React', 'Tailwind', 'Node.js'],
       github: 'https://github.com/Haimichi/manga-corner',
       demo: '#',
@@ -253,8 +252,8 @@ const Home = () => {
     {
       id: 3,
       title: 'Table Reservations',
-      description: 'Hệ thống đặt bàn trực tuyến cho nhà hàng và quán ăn.',
-      image: '/images/table-reservations.jpg',
+      description: 'Hệ thống nhà hàng SushiA với chức năng đặt bàn trực tuyến tự động',
+      image: '/booky.png',
       technologies: ['ASP.NET Core', 'SQLServer', 'WebServices'],
       github: 'https://github.com/Sushiba2ker/Table-reservations',
       demo: '#',
@@ -436,7 +435,7 @@ const Home = () => {
                 <a href="https://www.facebook.com/hajj02/" target="_blank" rel="noreferrer" className="icon-float delay-100 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-12">
                   <FaFacebookF size={24} />
                   </a>
-                <a href="mailto:your.email@example.com" className="icon-float delay-200 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-12">
+                <a href="mailto:your.nghthai02@gmail.com" className="icon-float delay-200 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-12">
                     <FaEnvelope size={24} />
                   </a>
                 </div>
@@ -469,175 +468,192 @@ const Home = () => {
       {/* Thêm khoảng cách nhỏ giữa hero và section tiếp theo */}
       <div className="h-4"></div>
 
-      {/* Project Showcase Section - viền mỏng hơn và khoảng cách nhỏ hơn */}
+      {/* Project Showcase Section */}
       <section 
         ref={projectsRef} 
-        className={`py-16 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
-        transition-all duration-500 rounded-3xl mx-4 md:mx-6 lg:mx-8 my-6 
+        className={`py-8 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
+        transition-all duration-500 rounded-3xl mx-3 md:mx-4 lg:mx-5 my-4 
         shadow-lg border ${isDark ? 'border-blue-800' : 'border-blue-300'}`}
       >
-        <div className="container mx-auto px-4">
-          <div className="mb-10">
-            <h2 className="text-5xl font-bold mb-4">10 Project Showcase</h2>
-            <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mb-8`}>
-              Explore the various projects I've worked on in the software development field. See my diverse and high-quality work.
-            </p>
-            <div className="flex items-center gap-4 mb-8">
-              <a href="https://github.com/Haimichi" target="_blank" rel="noreferrer" className={`${isDark ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'} transition-colors`}>
-                <FaGithub size={24} />
-              </a>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className={`${isDark ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'} transition-colors`}>
-                <FaLinkedin size={24} />
-              </a>
-              <button className={`ml-4 px-6 py-2 border ${isDark ? 'border-white hover:bg-white hover:text-blue-950' : 'border-gray-800 hover:bg-gray-800 hover:text-white'} rounded-full flex items-center gap-2 transition-all`}>
-                See More <FaArrowRight className="ml-1" />
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Project 1 */}
+        <div className="container mx-auto px-3 md:px-4 lg:px-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+            {/* Project card 1 */}
             <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg border ${isDark ? 'border-blue-700' : 'border-blue-200'}`}>
-              <div className={`relative p-3 ${isDark ? 'bg-[#0099ff]/10' : 'bg-blue-50'} aspect-video`}>
+              <div className={`relative p-2 ${isDark ? 'bg-blue-900/10' : 'bg-blue-50'} aspect-video`}>
                 <img 
-                  src="/images/positivus.jpg" 
-                  alt="Positivus Landing Page" 
+                  src={featuredProjects[0].image} 
+                  alt={featuredProjects[0].title} 
                   className="w-full h-full object-cover rounded-lg"
                   onError={(e) => {
                     e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
                   }}
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">Positivus Landing Page</h3>
-                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Implementation of the Positivus Landing Page design using React.js, CSS with BEM methodology, and Framer Motion for animations.
+              <div className="p-3 md:p-4">
+                <h3 className="text-xl font-bold mb-2">{featuredProjects[0].title}</h3>
+                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} mb-3 line-clamp-2 text-sm md:text-base`}>
+                  {featuredProjects[0].description}
                 </p>
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {featuredProjects[0].technologies.map((tech, index) => (
+                    <span key={index} className={`text-xs px-2 py-1 rounded-full ${isDark ? 'bg-blue-900/30 text-blue-100' : 'bg-blue-100 text-blue-800'}`}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex justify-between">
+                  <a 
+                    href={featuredProjects[0].github} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className={`flex items-center gap-1 text-sm ${isDark ? 'text-blue-300 hover:text-blue-200' : 'text-blue-600 hover:text-blue-800'}`}
+                  >
+                    <FaGithub size={16} /> GitHub
+                  </a>
+                  <a 
+                    href={featuredProjects[0].demo} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className={`flex items-center gap-1 text-sm ${isDark ? 'text-indigo-300 hover:text-indigo-200' : 'text-indigo-600 hover:text-indigo-800'}`}
+                  >
+                    <FaEye size={16} /> Demo
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* Project 2 */}
-            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg`}>
-              <div className={`relative p-3 ${isDark ? 'bg-[#ff4d94]/10' : 'bg-pink-50'} aspect-video`}>
+            {/* Project card 2 */}
+            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg border ${isDark ? 'border-blue-700' : 'border-blue-200'}`}>
+              <div className={`relative p-2 ${isDark ? 'bg-blue-900/10' : 'bg-blue-50'} aspect-video`}>
                 <img 
-                  src="/images/smoothie.jpg" 
-                  alt="Smoothie" 
+                  src={featuredProjects[1].image} 
+                  alt={featuredProjects[1].title} 
                   className="w-full h-full object-cover rounded-lg"
                   onError={(e) => {
                     e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
                   }}
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">Smoothie</h3>
-                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  A fresh and animation-rich website improvised by implementing Nickfox's UI/UX design prototype.
+              <div className="p-3 md:p-4">
+                <h3 className="text-xl font-bold mb-2">{featuredProjects[1].title}</h3>
+                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} mb-3 line-clamp-2 text-sm md:text-base`}>
+                  {featuredProjects[1].description}
                 </p>
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {featuredProjects[1].technologies.map((tech, index) => (
+                    <span key={index} className={`text-xs px-2 py-1 rounded-full ${isDark ? 'bg-blue-900/30 text-blue-100' : 'bg-blue-100 text-blue-800'}`}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex justify-between">
+                  <a 
+                    href={featuredProjects[1].github} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className={`flex items-center gap-1 text-sm ${isDark ? 'text-blue-300 hover:text-blue-200' : 'text-blue-600 hover:text-blue-800'}`}
+                  >
+                    <FaGithub size={16} /> GitHub
+                  </a>
+                  <a 
+                    href={featuredProjects[1].demo} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className={`flex items-center gap-1 text-sm ${isDark ? 'text-indigo-300 hover:text-indigo-200' : 'text-indigo-600 hover:text-indigo-800'}`}
+                  >
+                    <FaEye size={16} /> Demo
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* Project 3 */}
-            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg`}>
-              <div className={`relative p-3 ${isDark ? 'bg-[#00a3cc]/10' : 'bg-cyan-50'} aspect-video`}>
+            {/* Project card 3 */}
+            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg border ${isDark ? 'border-blue-700' : 'border-blue-200'}`}>
+              <div className={`relative p-2 ${isDark ? 'bg-blue-900/10' : 'bg-blue-50'} aspect-video`}>
                 <img 
-                  src="/images/bittle.jpg" 
-                  alt="Bittle Link Shortener" 
+                  src={featuredProjects[2].image} 
+                  alt={featuredProjects[2].title} 
                   className="w-full h-full object-cover rounded-lg"
                   onError={(e) => {
                     e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
                   }}
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">Bittle Link Shortener</h3>
-                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  A RESTful API for direct static URL shortening developed using Express.js, MongoDB, and short-id.
+              <div className="p-3 md:p-4">
+                <h3 className="text-xl font-bold mb-2">{featuredProjects[2].title}</h3>
+                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} mb-3 line-clamp-2 text-sm md:text-base`}>
+                  {featuredProjects[2].description}
                 </p>
-              </div>
-            </div>
-
-            {/* Project 4 */}
-            <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg`}>
-              <div className={`relative p-3 ${isDark ? 'bg-[#00cc66]/10' : 'bg-green-50'} aspect-video`}>
-                <img 
-                  src="/images/daunnesia.jpg" 
-                  alt="Daunnesia Angency" 
-                  className="w-full h-full object-cover rounded-lg"
-                  onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
-                  }}
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">Daunnesia Angency</h3>
-                <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Web application for Agency that sells software application without sign in feature.
-                </p>
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {featuredProjects[2].technologies.map((tech, index) => (
+                    <span key={index} className={`text-xs px-2 py-1 rounded-full ${isDark ? 'bg-blue-900/30 text-blue-100' : 'bg-blue-100 text-blue-800'}`}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex justify-between">
+                  <a 
+                    href={featuredProjects[2].github} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className={`flex items-center gap-1 text-sm ${isDark ? 'text-blue-300 hover:text-blue-200' : 'text-blue-600 hover:text-blue-800'}`}
+                  >
+                    <FaGithub size={16} /> GitHub
+                  </a>
+                  <a 
+                    href={featuredProjects[2].demo} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className={`flex items-center gap-1 text-sm ${isDark ? 'text-indigo-300 hover:text-indigo-200' : 'text-indigo-600 hover:text-indigo-800'}`}
+                  >
+                    <FaEye size={16} /> Demo
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Tech Stack Section - viền mỏng hơn và khoảng cách nhỏ hơn */}
+      {/* Tech Stack Section */}
       <section 
         ref={skillsRef} 
-        className={`py-16 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
-        rounded-3xl mx-4 md:mx-6 lg:mx-8 my-6 
+        className={`py-8 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
+        rounded-3xl mx-3 md:mx-4 lg:mx-5 my-4 
         shadow-lg border ${isDark ? 'border-blue-800' : 'border-blue-300'}`}
       >
-        <div className="container mx-auto px-4">
-          <div className="mb-10 text-center">
-            <h2 className="text-3xl font-bold mb-4 inline-block relative">
-              Kỹ Năng Chuyên Môn
-              <div className="absolute bottom-0 left-1/4 right-1/4 h-1 bg-blue-500 animate-width"></div>
-            </h2>
-            <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto mt-4`}>
-              Các công nghệ tôi thường xuyên sử dụng trong quá trình phát triển
-            </p>
-          </div>
-          
-          <TechGrid isDark={isDark} />
+        <div className="container mx-auto px-3 md:px-4 lg:px-5">
+          <TechGrid isDark={isDark} defaultBorder={isDark ? 'border-blue-900' : 'border-gray-200'} />
         </div>
       </section>
 
-      {/* Hobbies Section - viền mỏng hơn và khoảng cách nhỏ hơn */}
+      {/* Hobbies Section */}
       <section 
         ref={hobbiesRef} 
-        className={`py-16 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
-        rounded-3xl mx-4 md:mx-6 lg:mx-8 my-6 
+        className={`py-8 ${isDark ? 'bg-blue-950' : 'bg-gray-50'} ${isDark ? 'text-white' : 'text-gray-900'} 
+        rounded-3xl mx-3 md:mx-4 lg:mx-5 my-4 
         shadow-lg border ${isDark ? 'border-blue-800' : 'border-blue-300'}`}
       >
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold mb-4 inline-block relative">
-              Sở Thích
-              <div className="absolute bottom-0 left-1/3 right-1/3 h-1 bg-blue-500 animate-width"></div>
-            </h2>
-            <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} max-w-2xl mx-auto mt-4`}>
-              Những điều tôi yêu thích bên cạnh lập trình
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="container mx-auto px-3 md:px-4 lg:px-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             {/* Football Hobby */}
             <div className="group">
-              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2 border ${isDark ? 'border-blue-700' : 'border-blue-200'}`}>
+              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-5 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2 border ${isDark ? 'border-blue-700' : 'border-blue-200'}`}>
                 <div className={`absolute -right-16 -bottom-16 w-40 h-40 ${isDark ? 'bg-blue-500/10' : 'bg-blue-100'} rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500`}></div>
-                <div className="relative z-10 min-h-[200px]">
-                  <div className="relative flex justify-center items-center h-20 mb-6">
-                    <FaFutbol className="w-16 h-16 text-green-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
+                <div className="relative z-10 min-h-[180px]">
+                  <div className="relative flex justify-center items-center h-20 mb-4">
+                    <FaFutbol className="w-14 h-14 text-green-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
                     
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute">
                       <div className="football-wrapper">
-                        <FaFutbol className="w-16 h-16 text-green-500 football-bounce" />
+                        <FaFutbol className="w-14 h-14 text-green-500 football-bounce" />
                         <div className="football-shadow"></div>
                       </div>
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold mb-4 text-center">Bóng Đá</h3>
-                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center`}>
+                  <h3 className="text-lg font-bold mb-3 text-center">Bóng Đá</h3>
+                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center text-sm`}>
                     Đam mê theo dõi và chơi bóng đá. Là fan của Manchester United và đội tuyển Việt Nam.
                   </p>
                 </div>
@@ -646,11 +662,11 @@ const Home = () => {
 
             {/* Reading Hobby */}
             <div className="group">
-              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2`}>
+              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-5 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2`}>
                 <div className={`absolute -right-16 -bottom-16 w-40 h-40 ${isDark ? 'bg-indigo-500/10' : 'bg-indigo-100'} rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500`}></div>
-                <div className="relative z-10 min-h-[200px]">
-                  <div className="relative flex justify-center items-center h-20 mb-6">
-                    <FaBook className="w-16 h-16 text-blue-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
+                <div className="relative z-10 min-h-[180px]">
+                  <div className="relative flex justify-center items-center h-20 mb-4">
+                    <FaBook className="w-14 h-14 text-blue-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
                     
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute">
                       <div className="book-wrapper">
@@ -664,8 +680,8 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold mb-4 text-center">Đọc Sách</h3>
-                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center`}>
+                  <h3 className="text-lg font-bold mb-3 text-center">Đọc Sách</h3>
+                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center text-sm`}>
                     Yêu thích đọc sách về công nghệ, khoa học và phát triển bản thân.
                   </p>
                 </div>
@@ -674,11 +690,11 @@ const Home = () => {
 
             {/* Traveling Hobby */}
             <div className="group">
-              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-8 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2`}>
+              <div className={`relative overflow-hidden rounded-xl ${isDark ? 'bg-indigo-950' : 'bg-white'} p-5 shadow-lg transition-all duration-500 hover:shadow-xl transform hover:-translate-y-2`}>
                 <div className={`absolute -right-16 -bottom-16 w-40 h-40 ${isDark ? 'bg-purple-500/10' : 'bg-purple-100'} rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500`}></div>
-                <div className="relative z-10 min-h-[200px]">
-                  <div className="relative flex justify-center items-center h-24 mb-6">
-                    <FaPlane className="w-16 h-16 text-purple-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
+                <div className="relative z-10 min-h-[180px]">
+                  <div className="relative flex justify-center items-center h-20 mb-4">
+                    <FaPlane className="w-14 h-14 text-purple-500 transition-opacity duration-300 group-hover:opacity-0 absolute" />
                     
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute w-full travel-scene-container">
                       <div className="travel-scene">
@@ -696,8 +712,8 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold mb-4 text-center">Du Lịch</h3>
-                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center`}>
+                  <h3 className="text-lg font-bold mb-3 text-center">Du Lịch</h3>
+                  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center text-sm`}>
                     Thích khám phá những vùng đất mới và trải nghiệm văn hóa khác nhau.
                   </p>
                 </div>

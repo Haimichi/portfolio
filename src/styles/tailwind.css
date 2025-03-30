@@ -1417,3 +1417,29 @@ header.scrolled {
   animation: ping-modified 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/* Thêm vào cuối file */
+.section-title-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-title-line::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #3b82f6;
+  animation: titleLine 1.5s ease forwards;
+}
+
+@keyframes titleLine {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100px;
+  }
+}
+
