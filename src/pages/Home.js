@@ -1,10 +1,9 @@
-import React, { useRef, useEffect, useContext, useState } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowRight, FaGithub, FaLinkedin, FaEnvelope, FaCode, FaMobileAlt, FaServer, FaFutbol, FaBook, FaPlane, FaFacebookF, FaEye } from 'react-icons/fa';
+import { FaArrowRight, FaGithub, FaEnvelope, FaCode, FaServer, FaFutbol, FaBook, FaPlane, FaFacebookF, FaEye } from 'react-icons/fa';
 import { 
-  FaReact, FaHtml5, FaCss3Alt, FaJs, FaNodeJs, 
-  FaDatabase, FaDocker, FaGitAlt, FaNpm, FaFigma, FaAndroid, FaFirefox,
-  FaMobile, FaTools, FaLaptopCode
+  FaReact, FaHtml5, FaCss3Alt, FaNodeJs, 
+  FaDatabase, FaGitAlt, FaNpm, FaAndroid
 } from 'react-icons/fa';
 import { 
   SiFlutter, SiDart, SiMongodb, SiMysql, 
@@ -265,53 +264,6 @@ const Home = () => {
     }
   ];
 
-  // Dữ liệu cho phần kỹ năng
-  const skills = [
-    {
-      category: "Frontend",
-      icon: <FaCode className="w-8 h-8 mx-auto" />,
-      color: "blue",
-      technologies: [
-        { name: "Flutter", icon: <SiFlutter className="w-12 h-12" />, color: "text-blue-500" },
-        { name: "React", icon: <FaReact className="w-12 h-12" />, color: "text-blue-400" },
-        { name: "HTML5", icon: <FaHtml5 className="w-12 h-12" />, color: "text-orange-500" },
-        { name: "CSS3", icon: <FaCss3Alt className="w-12 h-12" />, color: "text-blue-600" }
-      ]
-    },
-    {
-      category: "Backend",
-      icon: <FaServer className="w-8 h-8 mx-auto" />,
-      color: "green",
-      technologies: [
-        { name: "Node.js", icon: <FaNodeJs className="w-12 h-12" />, color: "text-green-500" },
-        { name: "MongoDB", icon: <SiMongodb className="w-12 h-12" />, color: "text-green-600" },
-        { name: "MySQL", icon: <SiMysql className="w-12 h-12" />, color: "text-blue-600" },
-        { name: "Database", icon: <FaDatabase className="w-12 h-12" />, color: "text-gray-600" }
-      ]
-    },
-    {
-      category: "Mobile",
-      icon: <FaMobile className="w-8 h-8 mx-auto" />,
-      color: "purple",
-      technologies: [
-        { name: "Dart", icon: <SiDart className="w-12 h-12" />, color: "text-blue-500" },
-        { name: "Firebase", icon: <SiFirebase className="w-12 h-12" />, color: "text-yellow-500" },
-        { name: "Android", icon: <FaAndroid className="w-12 h-12" />, color: "text-green-500" }
-      ]
-    },
-    {
-      category: "Tools",
-      icon: <FaTools className="w-8 h-8 mx-auto" />,
-      color: "gray",
-      technologies: [
-        { name: "Git", icon: <FaGitAlt className="w-12 h-12" />, color: "text-orange-600" },
-        { name: "VS Code", icon: <SiVscodium className="w-12 h-12" />, color: "text-blue-500" },
-        { name: "Postman", icon: <SiPostman className="w-12 h-12" />, color: "text-orange-500" },
-        { name: "NPM", icon: <FaNpm className="w-12 h-12" />, color: "text-red-500" }
-      ]
-    }
-  ];
-
   const handleNavigation = (path) => {
     // Muestra un efecto antes de navegar
     document.body.classList.add('page-transitioning');
@@ -322,20 +274,6 @@ const Home = () => {
       document.body.classList.remove('page-transitioning');
     }, 300);
   };
-
-  // // Thêm hàm để tạo màu khác nhau cho mỗi dự án
-  // function getProjectColor(id) {
-  //   const colors = [
-  //     [0, 1, 1],    // Màu cyan - xanh lam
-  //     [0.33, 1, 1], // Màu xanh lá
-  //     [0.66, 1, 1], // Màu tím
-  //     [0.15, 1, 1], // Màu xanh lá nhạt
-  //     [0.5, 1, 1],  // Màu tím nhạt
-  //     [0.85, 1, 1]  // Màu đỏ nhạt
-  //   ];
-    
-  //   return colors[(id - 1) % colors.length];
-  // }
 
   return (
     <>
@@ -484,11 +422,11 @@ const Home = () => {
                   src={featuredProjects[0].image} 
                   alt={featuredProjects[0].title} 
                   className="w-full h-full object-cover rounded-lg"
-                  onError={(e) => {
+                    onError={(e) => {
                     e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
-                  }}
-                />
-              </div>
+                    }}
+                  />
+                </div>
               <div className="p-3 md:p-4">
                 <h3 className="text-xl font-bold mb-2">{featuredProjects[0].title}</h3>
                 <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} mb-3 line-clamp-2 text-sm md:text-base`}>
@@ -497,30 +435,30 @@ const Home = () => {
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {featuredProjects[0].technologies.map((tech, index) => (
                     <span key={index} className={`text-xs px-2 py-1 rounded-full ${isDark ? 'bg-blue-900/30 text-blue-100' : 'bg-blue-100 text-blue-800'}`}>
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex justify-between">
-                  <a 
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex justify-between">
+                    <a
                     href={featuredProjects[0].github} 
-                    target="_blank" 
+                      target="_blank"
                     rel="noreferrer" 
                     className={`flex items-center gap-1 text-sm ${isDark ? 'text-blue-300 hover:text-blue-200' : 'text-blue-600 hover:text-blue-800'}`}
-                  >
+                    >
                     <FaGithub size={16} /> GitHub
-                  </a>
-                  <a 
+                    </a>
+                    <a
                     href={featuredProjects[0].demo} 
-                    target="_blank" 
+                      target="_blank"
                     rel="noreferrer" 
                     className={`flex items-center gap-1 text-sm ${isDark ? 'text-indigo-300 hover:text-indigo-200' : 'text-indigo-600 hover:text-indigo-800'}`}
-                  >
+                    >
                     <FaEye size={16} /> Demo
-                  </a>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </div>
+          </div>
 
             {/* Project card 2 */}
             <div className={`${isDark ? 'bg-indigo-950' : 'bg-white'} rounded-xl overflow-hidden transition-transform hover:-translate-y-2 duration-300 shadow-lg border ${isDark ? 'border-blue-700' : 'border-blue-200'}`}>
@@ -533,7 +471,7 @@ const Home = () => {
                     e.target.src = 'https://via.placeholder.com/600x350?text=Project+Image';
                   }}
                 />
-              </div>
+          </div>
               <div className="p-3 md:p-4">
                 <h3 className="text-xl font-bold mb-2">{featuredProjects[1].title}</h3>
                 <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} mb-3 line-clamp-2 text-sm md:text-base`}>
@@ -545,7 +483,7 @@ const Home = () => {
                       {tech}
                     </span>
                   ))}
-                </div>
+          </div>
                 <div className="flex justify-between">
                   <a 
                     href={featuredProjects[1].github} 
@@ -650,7 +588,7 @@ const Home = () => {
                         <div className="football-shadow"></div>
                       </div>
                     </div>
-                  </div>
+          </div>
 
                   <h3 className="text-lg font-bold mb-3 text-center">Bóng Đá</h3>
                   <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-center text-sm`}>
